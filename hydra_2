@@ -1,137 +1,101 @@
-// PT 2 (40m)(90)
+
+
+// FUNCTIONS AS VALUES (5 min)(25)
+
+solid((({time})=>Math.sin(time)*[0.45]+ 0.8),0.3,0.7).out(o0)
+solid(0.2,0.8,0.4).out(o1)
+solid(0.3,0.1,0.2).out(o2)
+solid(0.7,0.1,0.5).out(o3)
+
+
+solid((({time})=>Math.sin(time)*[0.5]+ 0.25),0,0).out(o1)
+solid(0,(({time})=>Math.sin(time)*[0.5]+ 0.5),0).out(o2)
+solid(0,0,(({time})=>Math.sin(time)*[0.5]+ 0.75)).out(o3)
+
+
+
+
+osc( [1,10,50,100,250,500].fast(2) ).out(o0) // frequency
+osc( ({time}) => Math.sin(time/10) * 100 ).out(o1) // frequency 2
+osc( 10, [-10,-1,-0.1,0,0.1,1,10], 0 ).out(o2) // sync
+osc(10,0.1, ({time}) => Math.sin(time/10) * 100 ).out(o3) // offset
+render()
+
+
+// SHIFT (10 min)(35)
+// .shift( r, g, b, a )
+
+
+render(o3)
+
+solid(0,0,0)
+// solid(1,1,1)
+// solid(1,0,0)
+// solid(0.2,0.8,0.4)
+// solid(0.7,0.1,0.4)
+.shift(0.5,0.1,0.3,[0.5].fast(2))//SHIFT
+.shift(0,0,0.9,[0.8, 0.02])//SHIFT
+.shift(0.15,0.6,0.2,[0.2, 0.6])//RE-SHIFT
+.out(o3)
+
+
+solid(0,0,(({time})=>Math.sin(time)*[0.2]+0.6))
+// solid(0.2,0.8,0.4)
+.shift(0.5,0.2, 0, [0,0.8, 0.3, 0.6])// .shift( r, g, b, a )
+.out(o3)
+
+
+// NEXT OSC
+// osc( frequency, sync, offset )
+// .shift( r, g, b, a )
+
+osc(1)
+// osc(0.61,0.25,0.9)//
+.shift(0.5,0.2, 0.5, [0.8, 0.2])
+.out(o3)
+
+// >> PRACTICE with this 10 mins (45)
+
+
+
+
+
+
+//
+// noise([(({time})=>Math.sin(time))]).out()
+//
+// (({time})=>Math.sin(time))
+
+// SOURCES
+
+// solid().out(o0)
+//
+// src(o1).out(o0)
 //
 
-// SOURCES (DYNAMIC TEXTURES)
-
-// OSC (10m)(60)
-
-// default(60Hz)
-osc().out(o0)
-
-// 1/2 speed
-osc([30]).out(o0)
-
-// 8Hz
-osc(8).out(o0)
-
-// PARAMETER SEQUENCES
-// Lists as parameter sequences
-osc([80, 100, 200, 50], 0.02 ).out(o0)
-
-//[ , ]
-// iterate 8/30Hz
-osc([8,30]).out(o0)
-
-// FAST
-// decrease iterate value by 90%
-osc(([8,30]).fast(0.1)).out(o0)
-
-//ITERATE FAST - STROBE
-osc([80, 100, 200, 50].fast(0.3), 1 ).out(o0)
-
-osc(([80, 100, 200, 50].fast(0.5)), 0.02 ).out(o0) //very slow
-osc(([80, 100, 200, 50].fast(0.5)), 0.4 ).out(o0) //fast
-osc(([80, 100, 200, 50].fast(0.5)), -0.4 ).out(o0)  //reverse
-// osc(([80, 100, 200, 50].fast(0.5)), -152.4 ).out(o0) //very fast
+// osc(10).color(([1,0,0,1,0],[0,1,0,1,0],[0,0,1,1,0]).fast(6)).out(o0)
+//
+// osc(10).color([0.4,0.5,0.7]).out(o0)
+//
+// osc(10).color(([1,0,0],[0,1,0],[0,0,1]).fast(0.5)).out(o0)
 
 
-//SOFT ITERATE
-osc([4, 3, 2, 6].fast(0.5), 0.125 ).out(o0)
-
-
-
-// GRADIENT (5m)(65)
-gradient().out(o0)
-
-gradient(0.5).out(o0)
-
-gradient(1).out(o0)
-
-// gradient([1,2,4]).out(o0)
-// gradient([0.51,0.002,20]).out(o0)
-gradient([0.51,0.002,200]).out(o0)
-
-gradient([0.5,0.25,0.5,0.25]).out(o0)
-
-gradient([0.5,0.25,0.5,0.25]).invert([1,0,1,1,0.7,0.2]).out(o0)
-
-
-//NOISE (5m)(70)
-
-// (Perlin noise)
-// noise( scale, offset )
-    // scale :: int (default 10.0)
-    // offset :: float (default 0.1)
-
-noise().out()
-
-// NOISE SCALE
-
-//BASIC NOISE
-noise(1).out()
-
-//MORPHING SHAPES
-noise(5).out()
-
-//DYNAMIC TEXTURE
-noise(50,0.07).out()
-
-//COMPLEX TEXTURE
-noise(300,0.3).out()
-
-//A DYNAMIC GRADIANT
-noise(0.35).out()
-
-// A SECUENCE
-noise([1,2,0.25]).out()
-
-noise([1,2,0.5].fast(0.25)).out()
-
-noise([1,0.25]).out()
-
-noise([0.7,0.1,0.03]).out(o0)
-
-noise(0.5,0.1,0.3).out(o0)
-
-noise(0.5,0.1,0.3).scale(0.25)
-.out(o0)
-
-
-// NOISE OFFSET (speed)
-
-noise().out(o0)
-
-noise(1).out(o0)
-// default
-noise(1,0.1).out(o0)
-// default x10
-noise(1,1).out(o0)
-// slow down
-noise(1,0.03).out(o0)
-
-
-noise([1,0.5,1,1.5,2],[0.5,1,2,4,8,16]).out(o0)
-
-
-// VORONOI (RANDOM POLIGON TEXTURE) (5m)(75)
-
-// voronoi( scale, speed, blending )
-//(default 5),(default 0.3),(default 0.3)
-
-
-voronoi(0.4)
-.out()
-
-// LESS BLENDING (sharper edges)
-voronoi(1.8, 1.75, 0.1).out()
-
-// MORE BLENDING (less contrast)
-voronoi(1.8, 1.75, 2).out()
-// .diff(o0).out()
-
-// LESS BLENDING (negative shade reverses light)
-voronoi(1.8, 1.75, -2).out()
-
+//
+// // COMPLEX EXAMPLE
+// osc(10).color(([1],[0],[0]).fast(2)).out(o0)
+// osc( [1,10,50,100,250,500].fast(2) )
+// // .kaleid(20)
+// .out(o0) // frequency
+// osc( ({time}) => Math.sin(time/10) * 100 ).kaleid(19).out(o1) // frequency 2
+// osc( 10, [-10,-1,-0.1,0,0.1,1,10], 0 ).kaleid(21).out(o2) // sync
+// osc(10,0.1, ({time}) => Math.sin(time/10) * 1 ) // offset
+//   .modulate(o1,0.05)
+//   .modulate(o2,0.05)
+//   .modulate(o3,0.05)
+//   // .kaleid(2)
+//   .add(noise(3,10))
+//   .out(o3)
+// render(o3)
 
 
 // OPERATORS PT 1 (15m)(90)
