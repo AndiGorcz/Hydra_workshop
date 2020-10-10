@@ -1,3 +1,21 @@
+// MICROPHONE AUDIO INPUT AS VALUE
+// FFT functionality is available via an audio object accessed via "a". The editor uses https://github.com/meyda/meyda for audio analysis. 
+
+// To show the fft bins:
+
+// a.show()
+
+// Set number of fft bins:
+
+// a.setBins(6)
+
+// Access the value of the leftmost (lowest frequency) bin:
+
+// a.fft[0]
+
+// Use the value to control a variable:
+
+// osc(10, 0, () => (a.fft[0]*4)).out()
 
 
 // FUNCTIONS AS VALUES (5 min)(25)
